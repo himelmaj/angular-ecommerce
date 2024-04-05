@@ -1,0 +1,24 @@
+import { Routes } from '@angular/router';
+import { HomepageComponent } from './core/modules/home/pages/homepage/homepage.component';
+import { ProductspageComponent } from './core/modules/products/pages/productspage/productspage.component';
+import { CreateproductComponent } from './core/modules/admin/pages/createproduct/createproduct.component';
+
+export const routes: Routes = [
+  {
+    path: '',
+    redirectTo: 'home',
+    pathMatch: 'full',
+  },
+  {
+    path: 'home',
+    component: HomepageComponent,
+  },
+  {
+    path: 'products',
+    component: ProductspageComponent,
+  },
+  {
+    path: 'admin/create-product',
+    component: CreateproductComponent,
+  }
+];
