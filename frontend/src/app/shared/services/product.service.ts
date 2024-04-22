@@ -20,7 +20,7 @@ export class ProductService {
     this.products.push(product);
   }
 
-  getProduct(id: number): Product | null  {
+  getProduct(id: string): Product | null  {
     return this.products.find(product => product.id === id) || null;
   }
 }
