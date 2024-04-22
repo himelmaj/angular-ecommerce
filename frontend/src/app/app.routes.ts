@@ -2,7 +2,7 @@ import { Routes } from '@angular/router';
 import { HomepageComponent } from './core/modules/home/pages/homepage/homepage.component';
 import { ProductspageComponent } from './core/modules/products/pages/productspage/productspage.component';
 import { CreateproductComponent } from './core/modules/admin/pages/createproduct/createproduct.component';
-
+import { NotFoundComponent } from './core/modules/error/pages/not-found/not-found.component';
 export const routes: Routes = [
   {
     path: '',
@@ -20,5 +20,9 @@ export const routes: Routes = [
   {
     path: 'admin/create-product',
     component: CreateproductComponent,
-  }
+  },
+  { 
+    path: '**', 
+    component: NotFoundComponent, 
+  },
 ];
