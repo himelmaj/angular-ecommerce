@@ -1,31 +1,37 @@
-<section>
-    <form [formGroup]="form" (ngSubmit)="onSubmit()">
-        <div class="form-group">
-            <label for="id">Id</label>
-            <input type="text" class="form-control" id="id" formControlName="id">
-        </div>
-        <div class="form-group">
-            <label for="name">Name</label>
-            <input type="text" class="form-control" id="name" formControlName="name">
-        </div>
-        <div class="form-group">
-            <label for="description">Description</label>
-            <input type="text" class="form-control" id="description" formControlName="description">
-        </div>
-        <div class="form-group">
-            <label for="price">Price</label>
-            <input type="text" class="form-control" id="price" formControlName="price">
-        </div>
-        <div class="form-group">
-            <label for="category">Category</label>
-            <input type="text" class="form-control" id="category" formControlName="category">
-        </div>
-        <div class="form-group">
-            <label for="image">Image</label>
-            <input type="text" class="form-control" id="image" formControlName="image">
-        </div>
-        <div>
-            <button class="btn btn-primary" type="submit">Create</button>
-        </div>
+<section class="flex flex-1 justify-center items-center">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col gap-2">
+        <label class="input input-bordered flex items-center gap-2">
+            Id
+            <input type="text" id="id" formControlName="id" [(ngModel)]="product.id" />
+        </label>
+        <p *ngIf=""></p>
+
+        <label for="name" class="input input-bordered flex items-center gap-2">
+            Name
+            <input type="text" id="name" formControlName="name" [(ngModel)]="product.name">
+        </label>
+
+        <label for="description" class="input input-bordered flex items-center gap-2">Description
+            <input type="text" id="description" formControlName="description" [(ngModel)]="product.description">
+        </label>
+
+        <label for="price" class="input input-bordered flex items-center gap-2">
+            Price
+            <input type="number" id="price" formControlName="price" [(ngModel)]="product.price">
+        </label>
+
+        <select id="category" formControlName="category" class="select select-bordered w-full max-w-xs"
+            [(ngModel)]="product.category">
+            <option disabled selected>Select a category</option>
+            <option value="man">Man</option>
+            <option value="woman">Woman</option>
+            <option value="unisex">Unisex</option>
+        </select>
+
+        <label for="image" class="input input-bordered flex items-center gap-2">Image
+            <input type="text" id="image" formControlName="image" [(ngModel)]="product.image">
+        </label>
+
+        <button class="btn btn-success" type="submit">Create</button>
     </form>
 </section>
