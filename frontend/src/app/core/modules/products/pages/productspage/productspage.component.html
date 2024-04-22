@@ -1,1 +1,16 @@
-<p>productspage works!</p>
+<section class="grid grid-cols-4 gap-2">
+    @for (product of products; track product.id) {
+    <div>
+        <h2>{{ product.id }} - {{ product.name }}</h2>
+        <p>Price: {{ product.price }}</p>
+        <p>Description: {{ product.description }}</p>
+        <p>Category: {{ product.category }}</p>
+    </div>
+    } @empty {
+    <div class="col-span-4">
+        <div class="flex justify-center items-center h-64">
+            <p class="text-2xl text-gray-500">No products found</p>
+        </div>
+    </div>
+    }
+</section>
