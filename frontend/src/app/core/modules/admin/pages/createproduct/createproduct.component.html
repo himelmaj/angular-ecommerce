@@ -1,1 +1,31 @@
-<p>createproduct works!</p>
+<section>
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+            <label for="id">Id</label>
+            <input type="text" class="form-control" id="id" formControlName="id">
+        </div>
+        <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" formControlName="name">
+        </div>
+        <div class="form-group">
+            <label for="description">Description</label>
+            <input type="text" class="form-control" id="description" formControlName="description">
+        </div>
+        <div class="form-group">
+            <label for="price">Price</label>
+            <input type="text" class="form-control" id="price" formControlName="price">
+        </div>
+        <div class="form-group">
+            <label for="category">Category</label>
+            <input type="text" class="form-control" id="category" formControlName="category">
+        </div>
+        <div class="form-group">
+            <label for="image">Image</label>
+            <input type="text" class="form-control" id="image" formControlName="image">
+        </div>
+        <div>
+            <button class="btn btn-primary" type="submit">Create</button>
+        </div>
+    </form>
+</section>

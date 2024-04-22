@@ -1,0 +1,43 @@
+[
+    {
+      "id": 1,
+      "name": "Portátil HP Pavilion 15",
+      "price": 899.99,
+      "description": "Portátil HP Pavilion 15, procesador Intel Core i5, 8GB de RAM, 512GB SSD, pantalla Full HD de 15.6 pulgadas.",
+      "image": "laptop.jpg",
+      "category": "Electrónica"
+    },
+    {
+      "id": 2,
+      "name": "Smartphone Samsung Galaxy S22",
+      "price": 1099.99,
+      "description": "Smartphone Samsung Galaxy S22, 5G, pantalla Dynamic AMOLED de 6.5 pulgadas, cámara principal de 108MP, 256GB de almacenamiento.",
+      "image": "phone.jpg",
+      "category": "Electrónica"
+    },
+    {
+      "id": 3,
+      "name": "Camisa de algodón de manga larga",
+      "price": 29.99,
+      "description": "Camisa de algodón de manga larga para hombre, color blanco, talla M.",
+      "image": "shirt.jpg",
+      "category": "Ropa"
+    },
+    {
+      "id": 4,
+      "name": "Vestido de verano floral",
+      "price": 49.99,
+      "description": "Vestido de verano para mujer con estampado floral, tela ligera y fresca, ideal para días cálidos.",
+      "image": "dress.jpg",
+      "category": "Ropa"
+    },
+    {
+      "id": 5,
+      "name": "Vaqueros slim fit",
+      "price": 39.99,
+      "description": "Vaqueros slim fit para hombre, lavado oscuro, ajuste cómodo y moderno.",
+      "image": "jeans.jpg",
+      "category": "Ropa"
+    }
+  ]
+  
