@@ -27,10 +27,10 @@ export class CreateproductComponent {
   };
 
   form = new FormGroup({
-    id: new FormControl('', Validators.required),
-    name: new FormControl('', Validators.required),
+    id: new FormControl('', [Validators.required, Validators.pattern('[0-9]+'), Validators.minLength(10), Validators.maxLength(20)]),
+    name: new FormControl('', [Validators.required, Validators.minLength(3)]),
     description: new FormControl('', Validators.required),
-    price: new FormControl('', Validators.required),
+    price: new FormControl('', [Validators.required, Validators.min(0)]),
     image: new FormControl('', Validators.required),
     category: new FormControl('', Validators.required),
   });

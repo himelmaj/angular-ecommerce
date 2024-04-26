@@ -2,36 +2,59 @@
     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col gap-2">
         <label class="input input-bordered flex items-center gap-2">
             Id
-            <input type="text" id="id" formControlName="id" [(ngModel)]="product.id" />
+            <input type="text" id="id" formControlName="id" [(ngModel)]="product.id"/>
         </label>
-        <p *ngIf=""></p>
+
+        <div *ngIf="f.id.invalid && (f.id.dirty || f.id.touched)">
+            <p *ngIf="f.id.errors?.['required']" class="text-red-500">Id is required</p>
+            <p *ngIf="f.id.errors?.['minlength']" class="text-red-500">Id must be at least 10 characters long</p>
+            <p *ngIf="f.id.errors?.['maxlength']" class="text-red-500">Id must be at most 20 characters long</p>
+
+        </div>
 
         <label for="name" class="input input-bordered flex items-center gap-2">
             Name
             <input type="text" id="name" formControlName="name" [(ngModel)]="product.name">
         </label>
 
-        <label for="description" class="input input-bordered flex items-center gap-2">Description
-            <input type="text" id="description" formControlName="description" [(ngModel)]="product.description">
-        </label>
+        <div *ngIf="f.name.invalid && (f.name.dirty || f.name.touched)">
+            <p *ngIf="f.name.errors?.['required']" class="text-red-500">Name is required</p>
+            <p *ngIf="f.name.errors?.['minlength']" class="text-red-500">Name must be at least 3 characters long</p>
+        </div>
+        
+
+        <textarea id="description" formControlName="description"
+            class="textarea textarea-bordered" placeholder="Description" [(ngModel)]="product.description"></textarea>
 
         <label for="price" class="input input-bordered flex items-center gap-2">
             Price
             <input type="number" id="price" formControlName="price" [(ngModel)]="product.price">
         </label>
 
-        <select id="category" formControlName="category" class="select select-bordered w-full max-w-xs"
-            [(ngModel)]="product.category">
+        <div *ngIf="f.price.invalid && (f.price.dirty || f.price.touched)">
+            <p *ngIf="f.price.errors?.['required']" class="text-red-500">Price is required</p>
+            <p *ngIf="f.price.errors?.['min']" class="text-red-500">Price must be at least 1</p>
+        </div>
+
+        <select id="category" formControlName="category" class="select select-bordered w-full max-w-xs" [(ngModel)]="product.category">
             <option disabled selected>Select a category</option>
             <option value="man">Man</option>
             <option value="woman">Woman</option>
             <option value="unisex">Unisex</option>
         </select>
 
+        <div *ngIf="f.category.invalid && (f.category.dirty || f.category.touched)">
+            <p *ngIf="f.category.errors?.['required']" class="text-red-500">Category is required</p>
+        </div>
+
         <label for="image" class="input input-bordered flex items-center gap-2">Image
             <input type="text" id="image" formControlName="image" [(ngModel)]="product.image">
         </label>
 
-        <button class="btn btn-success" type="submit">Create</button>
+        <div *ngIf="f.image.invalid && (f.image.dirty || f.image.touched)">
+            <p *ngIf="f.image.errors?.['required']" class="text-red-500">Image is required</p>
+        </div>
+
+        <button class="btn btn-success" type="submit" [disabled]="form.invalid">Create</button>
     </form>
 </section>
