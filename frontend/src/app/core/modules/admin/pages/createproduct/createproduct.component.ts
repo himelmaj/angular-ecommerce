@@ -16,9 +16,11 @@ import { CommonModule } from '@angular/common';
   imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './createproduct.component.html',
 })
+
 export class CreateproductComponent {
+  
   product: Product = {
-    id: '',
+    id: crypto.randomUUID(),
     name: '',
     description: '',
     price: 0,
@@ -27,7 +29,6 @@ export class CreateproductComponent {
   };
 
   form = new FormGroup({
-    id: new FormControl('', [Validators.required, Validators.pattern('[0-9]+'), Validators.minLength(10), Validators.maxLength(20)]),
     name: new FormControl('', [Validators.required, Validators.minLength(3)]),
     description: new FormControl('', Validators.required),
     price: new FormControl('', [Validators.required, Validators.min(0)]),
@@ -40,11 +41,10 @@ export class CreateproductComponent {
   constructor(private productService: ProductService, private router: Router) {}
 
   onSubmit() {
-    if (this.form.invalid) {
-      console.log('Invalid form', this.product);
-      return;
-    }
+    if (this.form.invalid) console.log('Invalid form');
+    console.log(this.product);
     this.productService.addProduct(this.product);
     this.router.navigate(['/products']);
   }
+  
 }

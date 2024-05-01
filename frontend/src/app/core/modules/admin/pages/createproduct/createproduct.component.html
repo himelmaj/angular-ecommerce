@@ -1,6 +1,6 @@
 <section class="flex flex-1 justify-center items-center">
     <form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col gap-2">
-        <label class="input input-bordered flex items-center gap-2">
+        <!-- <label class="input input-bordered flex items-center gap-2">
             Id
             <input type="text" id="id" formControlName="id" [(ngModel)]="product.id"/>
         </label>
@@ -10,7 +10,7 @@
             <p *ngIf="f.id.errors?.['minlength']" class="text-red-500">Id must be at least 10 characters long</p>
             <p *ngIf="f.id.errors?.['maxlength']" class="text-red-500">Id must be at most 20 characters long</p>
 
-        </div>
+        </div> -->
 
         <label for="name" class="input input-bordered flex items-center gap-2">
             Name
@@ -28,7 +28,7 @@
 
         <label for="price" class="input input-bordered flex items-center gap-2">
             Price
-            <input type="number" id="price" formControlName="price" [(ngModel)]="product.price">
+            <input type="number" id="price" formControlName="price" [(ngModel)]="product.price" >
         </label>
 
         <div *ngIf="f.price.invalid && (f.price.dirty || f.price.touched)">
