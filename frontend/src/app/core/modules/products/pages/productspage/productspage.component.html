@@ -1,1 +1,26 @@
-<p>productspage works!</p>
+<section class="grid grid-cols-4 gap-5">
+  @for (product of products; track product.id) {
+  <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-zinc-900 dark:border-gray-700">
+    <a href="#">
+      <img class="rounded-t-lg" src="{{product.image}}" alt="" />
+    </a>
+    <div class="p-5">
+      <a href="#">
+        <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ product.name }}
+        </h5>
+      </a>
+      <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ product.description }}</p>
+      <div class="card-actions justify-end">
+        <div class="badge badge-outline">{{ product.category }}</div>
+        <div class="badge badge-outline">Products</div>
+      </div>
+    </div>
+  </div>
+  } @empty {
+  <div class="col-span-4">
+    <div class="flex justify-center items-center h-64">
+      <p class="text-2xl text-gray-500">No products found</p>
+    </div>
+  </div>
+  }
+</section>
