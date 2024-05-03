@@ -27,3 +27,11 @@ class ProductRead(ProductBase):
 class ProductCreate(ProductBase):
     pass
 
+class ProductUpdate(SQLModel):
+    name: Optional[str] = Field(max_length=100, default=None)
+    description: Optional[str] = Field(max_length=200, default=None)
+    price: Optional[float] = Field(default=0.0)
+    category: Optional[Category] = Field(default=None)
+    image: Optional[str] =  Field(default="https://via.placeholder.com/400")
+    
+
