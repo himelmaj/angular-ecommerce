@@ -42,8 +42,8 @@ export class CreateproductComponent {
 
   onSubmit() {
     if (this.form.invalid) console.log('Invalid form');
-    console.log(this.product);
-    this.productService.addProduct(this.product);
+    // console.log(this.product);
+    // this.productService.addProduct(this.product);
     this.router.navigate(['/products']);
   }
   

@@ -10,14 +10,15 @@ import { ProductService } from '../../../../../shared/services/product.service';
   templateUrl: './productspage.component.html',
 })
 export class ProductspageComponent implements OnInit {
-  products: Product[] = [];
+  products: any;
 
   constructor(private productService: ProductService) {
-    this.products = this.productService.products()
+    this.productService.fetchProducts();
   }
 
   ngOnInit(): void {
-    this.products = this.productService.products();
+    this.products = this.productService.productsSignal();
+    this.productService.fetchProducts();
     
   };
 }
