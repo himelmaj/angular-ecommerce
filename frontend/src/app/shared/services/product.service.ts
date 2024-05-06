@@ -9,17 +9,13 @@ const API_URL = 'http://localhost:8000/product';
   providedIn: 'root',
 })
 export class ProductService {
-
   productsSignal: WritableSignal<Product[]> = signal<Product[]>([]);
 
   constructor(private http: HttpClient) {
-    console.log('ProductService created');
     this.fetchProducts();
-    console.log('ProductService fetched products', this.productsSignal);
   }
 
   fetchProducts(): void {
-
     this.http
       .get<Product[]>(API_URL)
       .pipe(
