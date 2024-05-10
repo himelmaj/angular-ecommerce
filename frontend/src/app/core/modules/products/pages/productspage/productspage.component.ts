@@ -15,14 +15,10 @@ export class ProductspageComponent implements OnInit {
   constructor(private productService: ProductService) {
     this.productService.fetchProducts();
     this.products = this.productService.productsSignal();
-    console.log('ProductspageComponent created', this.products);
-    console.log('ProductspageComponent created', this.productService.productsSignal);
-
   }
 
   ngOnInit(): void {
-    this.products = this.productService.productsSignal();
     this.productService.fetchProducts();
-    
+    this.products = this.productService.productsSignal();
   };
 }

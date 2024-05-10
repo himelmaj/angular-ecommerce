@@ -47,4 +47,30 @@ def update_product_or_404(session: Session, product_id: int, product: ProductUpd
     session.commit()
     session.refresh(db_product)
     return db_product
+
+def delete_product_or_404(session: Session, product_id: int):
+    product = session.get(Product, product_id)
+    
+    if not product:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Product not found",
+        )
+        
+    session.delete(product)
+    session.commit()
+    return {"message": "Product deleted"}
+
+def get_product_or_404(session: Session, product_id: int):
+    product = session.get(Product, product_id)
+    
+    if not product:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Product not found",
+        )
+        
+    return product
+
+
   
