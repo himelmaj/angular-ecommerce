@@ -28,3 +28,4 @@ def update_product(*, product_id: int, product: ProductUpdate, session: Session 
 @router.delete('/products/{product_id}', status_code=status.HTTP_204_NO_CONTENT)
 def delete_product(*, product_id: int, session: Session = Depends(get_session)):
     return delete_product_or_404(session, product_id)
+

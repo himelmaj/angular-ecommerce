@@ -2,7 +2,7 @@ import { Product } from './../interfaces/product';
 import { Injectable, signal, WritableSignal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { catchError, retry, of } from 'rxjs';
-
+import { toast } from 'ngx-sonner';
 const API_URL = 'http://localhost:8000/products';
 
 @Injectable({
@@ -13,7 +13,7 @@ export class ProductService {
 
   constructor(private http: HttpClient) {
     this.fetchProducts();
-    console.log('products', this.productsSignal);
+    console.log('products', this.productsSignal());
   }
 
   fetchProducts(): void {
@@ -27,7 +27,6 @@ export class ProductService {
       )
       .subscribe((products) => {
         this.productsSignal.set(products);
-        // console.log('products', this.productsSignal());
       });
   }
 
@@ -37,11 +36,11 @@ export class ProductService {
       .pipe(
         retry(3),
         catchError((e) => {
-          console.log('error', e);
           return Promise.reject(e);
         })
-      ).subscribe((product) => {
-        console.log('product', product);
+      )
+      .subscribe((product) => {
+        this.fetchProducts();
       });
   }
 
@@ -54,7 +53,8 @@ export class ProductService {
           console.log('error', e);
           return Promise.reject(e);
         })
-      ).subscribe(() => {
+      )
+      .subscribe(() => {
         console.log('product deleted');
       });
   }

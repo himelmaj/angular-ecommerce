@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { toast } from 'ngx-sonner';
 import {
   ReactiveFormsModule,
   FormControl,
@@ -16,9 +17,7 @@ import { CommonModule } from '@angular/common';
   imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './createproduct.component.html',
 })
-
 export class CreateproductComponent {
-  
   product: Product = {
     name: '',
     description: '',
@@ -41,9 +40,14 @@ export class CreateproductComponent {
 
   onSubmit() {
     if (this.form.invalid) console.log('Invalid form');
-    
-    this.productService.addProduct(this.product);
-    this.router.navigate(['/products']);
+
+    try {
+      this.productService.addProduct(this.product);
+      toast.success('Product added');
+    } catch (e) {
+      toast.error('Error adding product');
+    }
+
+    // this.router.navigate(['/products']);
   }
-  
 }
