@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { toast } from 'ngx-sonner';
+
 import {
   ReactiveFormsModule,
   FormControl,
@@ -16,23 +18,20 @@ import { CommonModule } from '@angular/common';
   imports: [ReactiveFormsModule, CommonModule],
   templateUrl: './createproduct.component.html',
 })
-
 export class CreateproductComponent {
-  
   product: Product = {
-    id: crypto.randomUUID(),
     name: '',
     description: '',
     price: 0,
-    image: '',
-    category: '',
+    image: 'https://via.placeholder.com/400',
+    category: 'unisex'
   };
 
   form = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3)]),
     description: new FormControl('', Validators.required),
     price: new FormControl('', [Validators.required, Validators.min(0)]),
-    image: new FormControl('', Validators.required),
+    image: new FormControl('https://via.placeholder.com/400'),
     category: new FormControl('', Validators.required),
   });
 
@@ -42,9 +41,13 @@ export class CreateproductComponent {
 
   onSubmit() {
     if (this.form.invalid) console.log('Invalid form');
-    console.log(this.product);
-    this.productService.addProduct(this.product);
+
+    try {
+      this.productService.addProduct(this.product);
+      toast.success('Product added');
+    } catch (e) {
+      toast.error('Error adding product');
+    }
     this.router.navigate(['/products']);
   }
-  
 }

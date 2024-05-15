@@ -1,112 +1,99 @@
+import { Product } from './../interfaces/product';
 import { Injectable, signal, WritableSignal } from '@angular/core';
-import { Product } from '../interfaces/product';
+import { HttpClient } from '@angular/common/http';
+import { catchError, retry, of } from 'rxjs';
+import { toast } from 'ngx-sonner';
+const API_URL = 'http://localhost:8000/products';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ProductService {
-  // private products: Product[] = [
-  //   {
-  //     id: '1',
-  //     name: 'Product 1',
-  //     description: 'Description 1',
-  //     price: 100,
-  //     image: 'https://via.placeholder.com/400',
-  //     category: 'Category 1'
-  //   },
-  //   {
-  //     id: '2',
-  //     name: 'Product 2',
-  //     description: 'Description 2',
-  //     price: 200,
-  //     image: 'https://via.placeholder.com/400',
-  //     category: 'Category 2'
-  //   },
-  //   {
-  //     id: '3',
-  //     name: 'Product 3',
-  //     description: 'Description 3',
-  //     price: 300,
-  //     image: 'https://via.placeholder.com/400',
-  //     category: 'Category 3'
-  //   },
-  //   {
-  //     id: '4',
-  //     name: 'Product 4',
-  //     description: 'Description 4',
-  //     price: 400,
-  //     image: 'https://via.placeholder.com/400',
-  //     category: 'Category 4'
-  //   },
-  //   {
-  //     id: '5',
-  //     name: 'Product 5',
-  //     description: 'Description 5',
-  //     price: 500,
-  //     image: 'https://via.placeholder.com/400',
-  //     category: 'Category 5'
-  //   }
-  // ];
+  productsSignal = signal<Product[]>([]);
+  productSignal = signal<Product>({
+    id: 0,
+    name: '',
+    description: '',
+    price: 0,
+    image: '',
+    category: 'unisex',
+  });
 
-  // constructor() { }
 
-  // getProducts(): Product[] {
-  //   return this.products;
-  // }
+  constructor(private http: HttpClient) {}
 
-  // addProduct(product: Product): void {
-  //   this.products.push(product);
-  // }
-
-  // getProduct(id: string): Product | null  {
-  //   return this.products.find(product => product.id === id) || null;
-  // }
-
-   products: WritableSignal<Product[]> = signal<Product[]>([
-    {
-      id: crypto.randomUUID(),
-      name: 'Product 1',
-      description: 'Description 1',
-      price: 100,
-      image: 'https://via.placeholder.com/400',
-      category: 'Category 1',
-    },
-    {
-      id: crypto.randomUUID(),
-      name: 'Product 2',
-      description: 'Description 2',
-      price: 200,
-      image: 'https://via.placeholder.com/400',
-      category: 'Category 2',
-    },
-    {
-      id: crypto.randomUUID(),
-      name: 'Product 3',
-      description: 'Description 3',
-      price: 300,
-      image: 'https://via.placeholder.com/400',
-      category: 'Category 3',
-    },
-    {
-      id: crypto.randomUUID(),
-      name: 'Product 4',
-      description: 'Description 4',
-      price: 400,
-      image: 'https://via.placeholder.com/400',
-      category: 'Category 4',
-    },
-    {
-      id: crypto.randomUUID(),
-      name: 'Product 5',
-      description: 'Description 5',
-      price: 500,
-      image: 'https://via.placeholder.com/400',
-      category: 'Category 5',
-    },
-  ]);
+  fetchProducts(): void {
+    this.http
+      .get<Product[]>(API_URL)
+      .pipe(
+        retry(3),
+        catchError((e) => {
+          return Promise.reject(e);
+        })
+      )
+      .subscribe((products) => {
+        this.productsSignal.set(products);
+      });
+  }
 
   addProduct(product: Product): void {
-    this.products.update((products) => [...products, product]);
+    this.http
+      .post<Product>(API_URL, product)
+      .pipe(
+        retry(3),
+        catchError((e) => {
+          return Promise.reject(e);
+        })
+      )
+      .subscribe((product) => {
+        this.fetchProducts();
+        console.log('product added', product);
+      });
   }
-  
+
+  deleteProduct(id: number): void {
+    this.http
+      .delete(`${API_URL}/${id}`)
+      .pipe(
+        retry(3),
+        catchError((e) => {
+          console.log('error', e);
+          return Promise.reject(e);
+        })
+      )
+      .subscribe((res) => {
+        this.fetchProducts();
+        console.log('product deleted', res);
+      });
+  }
+
+  getProductById(id: number): Product | any {
+    console.log('id-2', id);
+    this.http
+      .get<Product>(`${API_URL}/${id}`)
+      .pipe(
+        retry(3),
+        catchError((e) => {
+          return Promise.reject(e);
+        })
+      )
+      .subscribe((product) => {
+        this.productSignal.set(product);
+      });
+  }
+
+  updateProduct(id: number, product: Product): void {
+    this.http
+      .patch<Product>(`${API_URL}/${id}`, product)
+      .pipe(
+        retry(3),
+        catchError((e) => {
+          return Promise.reject(e);
+        })
+      )
+      .subscribe((product) => {
+        this.fetchProducts();
+        console.log('product updated', product);
+      });
+  }
 }

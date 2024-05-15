@@ -1,20 +1,47 @@
 <section class="grid grid-cols-4 gap-5">
-  @for (product of products; track product.id) {
+  @for (product of products; track product) {
   <div class="max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-zinc-900 dark:border-gray-700">
     <a href="#">
       <img class="rounded-t-lg" src="{{product.image}}" alt="" />
     </a>
     <div class="p-5">
-      <a href="#">
+
+      <div class="flex flex-row justify-between">
         <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">{{ product.name }}
         </h5>
-      </a>
+
+        <div class="flex gap-2">
+
+          @if (product.id) {
+          <button class="btn btn-outline btn-square btn-danger" (click)="deleteProduct(product.id)">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12" />
+            </svg>
+          </button>
+
+          <a routerLink="{{ '/admin/edit-product/' + product.id }}" class="btn btn-outline btn-square btn-primary">
+            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24"
+              stroke="currentColor">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14v5m0 0v-5m0 5h-5m5 0h5" />
+            </svg>
+
+          </a>
+          }
+
+        </div>
+
+
+      </div>
       <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">{{ product.description }}</p>
       <div class="card-actions justify-end">
         <div class="badge badge-outline">{{ product.category }}</div>
         <div class="badge badge-outline">Products</div>
       </div>
     </div>
+
   </div>
   } @empty {
   <div class="col-span-4">
