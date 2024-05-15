@@ -8,7 +8,6 @@ import { NavbarComponent } from './shared/components/header/navbar/navbar.compon
 import { FooterComponent } from './shared/components/footer/footer/footer.component';
 import { RouterOutlet } from '@angular/router';
 import { HomepageComponent } from './core/modules/home/pages/homepage/homepage.component';
-
 @Component({
   selector: 'app-root',
   standalone: true,
