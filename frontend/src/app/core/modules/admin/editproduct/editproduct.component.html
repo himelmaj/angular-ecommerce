@@ -1,0 +1,12 @@
+<section class="flex flex-1 justify-center items-center">
+    <form [formGroup]="form" (ngSubmit)="onSubmit()" class="flex flex-col gap-2">
+
+        <label class="input input-bordered flex items-center gap-2">
+            Id
+            <input type="text" id="id" formControlName="id" [(ngModel)]="product.id"/>
+        </label>
+
+    
+        <button class="btn btn-success" type="submit" [disabled]="form.invalid">Create</button>
+    </form>
+</section>

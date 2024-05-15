@@ -48,12 +48,8 @@
         </div>
 
         <label for="image" class="input input-bordered flex items-center gap-2">Image
-            <input type="text" id="image" formControlName="image" [(ngModel)]="product.image">
+            <input type="text" id="image" formControlName="image" [(ngModel)]="product.image" [defaultValue]="'https://via.placeholder.com/400'">
         </label>
-
-        <div *ngIf="f.image.invalid && (f.image.dirty || f.image.touched)">
-            <p *ngIf="f.image.errors?.['required']" class="text-red-500">Image is required</p>
-        </div>
 
         <button class="btn btn-success" type="submit" [disabled]="form.invalid">Create</button>
     </form>

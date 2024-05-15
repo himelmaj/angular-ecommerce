@@ -9,8 +9,15 @@ const API_URL = 'http://localhost:8000/products';
   providedIn: 'root',
 })
 export class ProductService {
-  productsSignal = signal<any[]>([]);
-
+  productsSignal = signal<Product[]>([]);
+  productSignal = signal<Product>({
+    id: 0,
+    name: '',
+    price: 0,
+    description: '',
+    image: '',
+    category: 'unisex',
+  });
   constructor(private http: HttpClient) {
     this.fetchProducts();
     console.log('products', this.productsSignal());
@@ -18,7 +25,7 @@ export class ProductService {
 
   fetchProducts(): void {
     this.http
-      .get<any[]>(API_URL)
+      .get<Product[]>(API_URL)
       .pipe(
         retry(3),
         catchError((e) => {
@@ -41,6 +48,7 @@ export class ProductService {
       )
       .subscribe((product) => {
         this.fetchProducts();
+        console.log('product added', product);
       });
   }
 
@@ -55,7 +63,35 @@ export class ProductService {
         })
       )
       .subscribe(() => {
+        this.fetchProducts();
         console.log('product deleted');
       });
   }
+
+  getProductById(id: number): Product | any {
+    this.http.get<Product>(`${API_URL}/${id}`).subscribe({
+      next: (product) => {
+        this.productSignal.set(product);
+      },
+      error: (error) => {
+        console.error('Error fetching product:', error);
+      },
+    });
+  }
+
+  updateProduct(idProduct: number, product: Product): void {
+    this.http
+      .put<Product>(`${API_URL}/${idProduct}`, product)
+      .pipe(
+        retry(3),
+        catchError((e) => {
+          return Promise.reject(e);
+        })
+      )
+      .subscribe((product) => {
+        this.fetchProducts();
+        console.log('product updated', product);
+      });
+  }
+
 }
