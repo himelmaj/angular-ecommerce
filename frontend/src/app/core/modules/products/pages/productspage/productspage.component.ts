@@ -1,21 +1,23 @@
-import { Component } from '@angular/core';
+import { Component, effect } from '@angular/core';
 import { OnInit } from '@angular/core';
 import { Product } from '../../../../../shared/interfaces/product';
 import { ProductService } from '../../../../../shared/services/product.service';
 import { toast } from 'ngx-sonner';
-import { Router } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-productspage',
   standalone: true,
-  imports: [],
+  imports: [RouterLink],
   templateUrl: './productspage.component.html',
 })
 export class ProductspageComponent implements OnInit {
   products: Product[];
 
-  constructor(private productService: ProductService,  private router: Router) {
-    this.productService.fetchProducts();
+  constructor(private productService: ProductService, private router: Router) {
+    effect(() => {
+      this.productService.fetchProducts();
+    });
     this.products = this.productService.productsSignal();
   }
 
@@ -27,5 +29,5 @@ export class ProductspageComponent implements OnInit {
 
   ngOnInit(): void {
     this.products = this.productService.productsSignal();
-  };
+  }
 }

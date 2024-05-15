@@ -3,7 +3,7 @@ import { HomepageComponent } from './core/modules/home/pages/homepage/homepage.c
 import { ProductspageComponent } from './core/modules/products/pages/productspage/productspage.component';
 import { CreateproductComponent } from './core/modules/admin/pages/createproduct/createproduct.component';
 import { NotFoundComponent } from './core/modules/error/pages/not-found/not-found.component';
-import { EditproductComponent } from './core/modules/admin/editproduct/editproduct.component';
+import { EditproductComponent } from './core/modules/admin/pages/editproduct/editproduct.component';
 export const routes: Routes = [
   {
     path: '',

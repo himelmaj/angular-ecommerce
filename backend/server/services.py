@@ -13,6 +13,16 @@ def get_all_products_or_404(session: Session):
         )
         
     return products
+def get_product_by_id_or_404(session: Session, product_id: int):
+    product = session.exec(select(Product).filter(Product.id == product_id)).first()
+    
+    if not product:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Product not found",
+        )
+        
+    return product
 
 def create_product_or_404(session: Session, product: ProductCreate):
     product = Product.model_validate(product)

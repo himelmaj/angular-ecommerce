@@ -1,3 +1,4 @@
+/* To learn more about this file see: https://angular.io/config/tsconfig. */
 {
   "compileOnSave": false,
   "compilerOptions": {
@@ -20,15 +21,7 @@
     "lib": [
       "ES2022",
       "dom"
-    ],
-    "paths": {
-      "@spartan-ng/ui-sonner-helm": [
-        ".\\ui-sonner-helm/src/index.ts"
-      ],
-      "@spartan-ng/ui-icon-helm": [
-        ".\\ui-icon-helm/src/index.ts"
-      ]
-    }
+    ]
   },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
