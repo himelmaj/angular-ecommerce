@@ -33,7 +33,7 @@
 
         <div *ngIf="f.price.invalid && (f.price.dirty || f.price.touched)">
             <p *ngIf="f.price.errors?.['required']" class="text-red-500">Price is required</p>
-            <p *ngIf="f.price.errors?.['min']" class="text-red-500">Price must be at least 1</p>
+            <p *ngIf="f.price.errors?.['min']" class="text-red-500">Price must be at least 0</p>
         </div>
 
         <select id="category" formControlName="category" class="select select-bordered w-full max-w-xs" [(ngModel)]="product.category">
@@ -46,6 +46,12 @@
         <div *ngIf="f.category.invalid && (f.category.dirty || f.category.touched)">
             <p *ngIf="f.category.errors?.['required']" class="text-red-500">Category is required</p>
         </div>
+
+
+        <label class="label cursor-pointer">
+            <span class="label-text">Featured</span> 
+            <input type="checkbox" checked="checked" class="checkbox" />
+        </label>
 
         <label for="image" class="input input-bordered flex items-center gap-2">Image
             <input type="text" id="image" formControlName="image" [(ngModel)]="product.image" [defaultValue]="'https://via.placeholder.com/400'">

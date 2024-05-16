@@ -25,6 +25,7 @@ export class EditproductComponent implements OnInit {
   product: Product = {
     name: '',
     description: '',
+    featured: false,
     price: 0,
     image: 'https://via.placeholder.com/400',
     category: 'unisex',
@@ -40,6 +41,7 @@ export class EditproductComponent implements OnInit {
     name: new FormControl('', [Validators.required, Validators.minLength(3)]),
     description: new FormControl('', Validators.required),
     price: new FormControl('', [Validators.required, Validators.min(0)]),
+    featured: new FormControl(false),
     image: new FormControl('https://via.placeholder.com/400'),
     category: new FormControl('', Validators.required),
   });

@@ -15,10 +15,10 @@ export class ProductService {
     name: '',
     description: '',
     price: 0,
+    featured: false,
     image: '',
     category: 'unisex',
   });
-
 
   constructor(private http: HttpClient) {}
 

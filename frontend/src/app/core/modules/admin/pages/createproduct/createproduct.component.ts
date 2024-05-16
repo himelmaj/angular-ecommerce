@@ -23,6 +23,7 @@ export class CreateproductComponent {
     name: '',
     description: '',
     price: 0,
+    featured: false,
     image: 'https://via.placeholder.com/400',
     category: 'unisex'
   };
@@ -30,6 +31,7 @@ export class CreateproductComponent {
   form = new FormGroup({
     name: new FormControl('', [Validators.required, Validators.minLength(3)]),
     description: new FormControl('', Validators.required),
+    featured: new FormControl(false),
     price: new FormControl('', [Validators.required, Validators.min(0)]),
     image: new FormControl('https://via.placeholder.com/400'),
     category: new FormControl('', Validators.required),
